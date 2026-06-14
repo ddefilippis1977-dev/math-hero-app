@@ -55,31 +55,31 @@ const characters = [
 ];
 
 const levelThemes = [
-  { page: "#dff6ff", stageA: "#73d8fb", stageB: "#42b9ec" },
-  { page: "#eafff4", stageA: "#7be7aa", stageB: "#38c172" },
-  { page: "#fff5d6", stageA: "#ffd166", stageB: "#f59f00" },
-  { page: "#ffe8e8", stageA: "#ff8a80", stageB: "#f0442f" },
-  { page: "#f0eaff", stageA: "#b197fc", stageB: "#7357ff" },
-  { page: "#e8fbff", stageA: "#74e4ff", stageB: "#19a0ff" },
-  { page: "#fff0f6", stageA: "#faa2c1", stageB: "#e64980" },
-  { page: "#edf7d7", stageA: "#b2f26b", stageB: "#74b816" },
-  { page: "#fff3e6", stageA: "#ffa94d", stageB: "#f76707" },
-  { page: "#eaf2ff", stageA: "#91c5ff", stageB: "#1d75d8" },
-  { page: "#f7f9e8", stageA: "#e9fac8", stageB: "#94d82d" },
-  { page: "#f0fffb", stageA: "#63e6be", stageB: "#12b886" },
-  { page: "#fff9db", stageA: "#ffec99", stageB: "#fab005" },
-  { page: "#f3f0ff", stageA: "#d0bfff", stageB: "#845ef7" },
-  { page: "#e6fcf5", stageA: "#96f2d7", stageB: "#20c997" },
-  { page: "#fff4e6", stageA: "#ffc078", stageB: "#fd7e14" },
-  { page: "#edf2ff", stageA: "#bac8ff", stageB: "#4c6ef5" },
-  { page: "#ebfbee", stageA: "#8ce99a", stageB: "#37b24d" },
-  { page: "#f8f0fc", stageA: "#e599f7", stageB: "#ae3ec9" },
-  { page: "#e3fafc", stageA: "#66d9e8", stageB: "#1098ad" },
-  { page: "#fff0f0", stageA: "#ffa8a8", stageB: "#fa5252" },
-  { page: "#f4fce3", stageA: "#c0eb75", stageB: "#82c91e" },
-  { page: "#e7f5ff", stageA: "#74c0fc", stageB: "#228be6" },
-  { page: "#fff0f6", stageA: "#f783ac", stageB: "#d6336c" },
-  { page: "#f1f3f5", stageA: "#adb5bd", stageB: "#495057" },
+  { page: "#dff6ff", stageA: "#73d8fb", stageB: "#42b9ec", work: "#eefaff", panel: "#f7fdff", border: "#8edcf8" },
+  { page: "#eafff4", stageA: "#7be7aa", stageB: "#38c172", work: "#ecfff3", panel: "#f5fff9", border: "#8ce99a" },
+  { page: "#fff5d6", stageA: "#ffd166", stageB: "#f59f00", work: "#fff8df", panel: "#fffaf0", border: "#ffd43b" },
+  { page: "#ffe8e8", stageA: "#ff8a80", stageB: "#f0442f", work: "#fff0f0", panel: "#fff7f7", border: "#ffaaaa" },
+  { page: "#f0eaff", stageA: "#b197fc", stageB: "#7357ff", work: "#f4f0ff", panel: "#faf8ff", border: "#b197fc" },
+  { page: "#e8fbff", stageA: "#74e4ff", stageB: "#19a0ff", work: "#edfbff", panel: "#f8feff", border: "#66d9e8" },
+  { page: "#fff0f6", stageA: "#faa2c1", stageB: "#e64980", work: "#fff0f6", panel: "#fff8fb", border: "#faa2c1" },
+  { page: "#edf7d7", stageA: "#b2f26b", stageB: "#74b816", work: "#f4fce3", panel: "#fbfff2", border: "#b2f26b" },
+  { page: "#fff3e6", stageA: "#ffa94d", stageB: "#f76707", work: "#fff4e6", panel: "#fff9f2", border: "#ffc078" },
+  { page: "#eaf2ff", stageA: "#91c5ff", stageB: "#1d75d8", work: "#edf4ff", panel: "#f8fbff", border: "#91c5ff" },
+  { page: "#f7f9e8", stageA: "#e9fac8", stageB: "#94d82d", work: "#f8fbe8", panel: "#fdfff4", border: "#d8f5a2" },
+  { page: "#f0fffb", stageA: "#63e6be", stageB: "#12b886", work: "#e6fcf5", panel: "#f5fffb", border: "#96f2d7" },
+  { page: "#fff9db", stageA: "#ffec99", stageB: "#fab005", work: "#fff9db", panel: "#fffdf2", border: "#ffe066" },
+  { page: "#f3f0ff", stageA: "#d0bfff", stageB: "#845ef7", work: "#f3f0ff", panel: "#fbfaff", border: "#d0bfff" },
+  { page: "#e6fcf5", stageA: "#96f2d7", stageB: "#20c997", work: "#e6fcf5", panel: "#f3fffb", border: "#63e6be" },
+  { page: "#fff4e6", stageA: "#ffc078", stageB: "#fd7e14", work: "#fff4e6", panel: "#fffaf4", border: "#ffc078" },
+  { page: "#edf2ff", stageA: "#bac8ff", stageB: "#4c6ef5", work: "#edf2ff", panel: "#f8faff", border: "#bac8ff" },
+  { page: "#ebfbee", stageA: "#8ce99a", stageB: "#37b24d", work: "#ebfbee", panel: "#f7fff8", border: "#8ce99a" },
+  { page: "#f8f0fc", stageA: "#e599f7", stageB: "#ae3ec9", work: "#f8f0fc", panel: "#fdf8ff", border: "#e599f7" },
+  { page: "#e3fafc", stageA: "#66d9e8", stageB: "#1098ad", work: "#e3fafc", panel: "#f3feff", border: "#66d9e8" },
+  { page: "#fff0f0", stageA: "#ffa8a8", stageB: "#fa5252", work: "#fff0f0", panel: "#fff8f8", border: "#ffa8a8" },
+  { page: "#f4fce3", stageA: "#c0eb75", stageB: "#82c91e", work: "#f4fce3", panel: "#fbfff1", border: "#c0eb75" },
+  { page: "#e7f5ff", stageA: "#74c0fc", stageB: "#228be6", work: "#e7f5ff", panel: "#f5fbff", border: "#74c0fc" },
+  { page: "#fff0f6", stageA: "#f783ac", stageB: "#d6336c", work: "#fff0f6", panel: "#fff7fb", border: "#f783ac" },
+  { page: "#f1f3f5", stageA: "#adb5bd", stageB: "#495057", work: "#f1f3f5", panel: "#fafafa", border: "#adb5bd" },
 ];
 
 const LEVELS_PER_STEP = 5;
@@ -262,6 +262,9 @@ function renderTheme(index) {
   document.documentElement.style.setProperty("--page-bg", theme.page);
   document.documentElement.style.setProperty("--stage-a", theme.stageA);
   document.documentElement.style.setProperty("--stage-b", theme.stageB);
+  document.documentElement.style.setProperty("--work-bg", theme.work);
+  document.documentElement.style.setProperty("--picker-bg", theme.panel);
+  document.documentElement.style.setProperty("--theme-border", theme.border);
 }
 
 function renderCharacter(index) {
