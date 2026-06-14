@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Math Hero - esercizi interattivi</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="topbar" aria-label="Pannello principale">
+        <div>
+          <p class="eyebrow">Math Hero</p>
+          <h1>Esercizi di matematica</h1>
+        </div>
+        <div class="controls" aria-label="Impostazioni">
+          <label class="toggle">
+            <input id="motionToggle" type="checkbox" />
+            <span>Animazioni leggere</span>
+          </label>
+          <button id="resetBtn" class="icon-button" type="button" aria-label="Ricomincia livello">↻</button>
+        </div>
+      </section>
+
+      <section class="stage" aria-live="polite">
+        <div class="mascot-zone">
+          <div id="mascot" class="mascot runner" role="img" aria-label="Mascotte blu sorridente">
+            <div class="quills"></div>
+            <div class="face">
+              <span class="eye left"></span>
+              <span class="eye right"></span>
+              <span class="smile"></span>
+            </div>
+            <div class="glove ok-glove">OK</div>
+            <div class="shoe"></div>
+          </div>
+          <div id="robot" class="robot" role="img" aria-label="Piccolo robot amichevole">
+            <div class="antenna"></div>
+            <div class="visor">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="body"></div>
+          </div>
+        </div>
+
+        <div class="progress-panel">
+          <div>
+            <p id="levelLabel" class="panel-label">Livello 1</p>
+            <h2 id="levelTitle">Addizioni facili</h2>
+          </div>
+          <div class="stars" id="stars" aria-label="Stelle completate"></div>
+        </div>
+      </section>
+
+      <nav class="level-strip" aria-label="Scegli livello">
+        <button class="level active" type="button" data-level="0">1</button>
+        <button class="level" type="button" data-level="1">2</button>
+        <button class="level" type="button" data-level="2">3</button>
+        <button class="level" type="button" data-level="3">4</button>
+        <button class="level" type="button" data-level="4">5</button>
+        <button class="level" type="button" data-level="5">6</button>
+        <button class="level" type="button" data-level="6">7</button>
+        <button class="level" type="button" data-level="7">8</button>
+        <button class="level" type="button" data-level="8">9</button>
+        <button class="level" type="button" data-level="9">10</button>
+      </nav>
+
+      <section class="worksheet" id="worksheet" aria-label="Esercizi"></section>
+
+      <section id="completeCard" class="complete-card" hidden>
+        <h2>Bravo, livello completato!</h2>
+        <p>La mascotte fa OK. Puoi passare al livello successivo.</p>
+        <button id="nextBtn" class="primary" type="button">Prossimo livello</button>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
