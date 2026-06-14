@@ -151,12 +151,20 @@ function refreshLevelButtons() {
 }
 
 function checkAnswer(exercise, input, answer) {
-  const value = Number(input.value);
+  const rawValue = input.value.trim();
+  const value = Number(rawValue);
+  const expectedLength = String(answer).length;
   const wasCorrect = exercise.classList.contains("correct");
   const wasWrong = exercise.classList.contains("wrong");
   exercise.classList.remove("correct", "wrong");
 
-  if (input.value === "") {
+  if (rawValue === "") {
+    input.removeAttribute("aria-invalid");
+    updateProgress();
+    return;
+  }
+
+  if (rawValue.length < expectedLength) {
     input.removeAttribute("aria-invalid");
     updateProgress();
     return;
