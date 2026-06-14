@@ -239,6 +239,7 @@ function renderLevel(index) {
   level.items.forEach(([a, operator, b], itemIndex) => {
     const exercise = document.createElement("article");
     exercise.className = "exercise";
+    applyExerciseTheme(exercise, currentLevel);
     exercise.innerHTML = `
       <div class="formula" aria-label="${a} ${operator} ${b}">
         <span class="n1">${a}</span>
@@ -265,6 +266,15 @@ function renderTheme(index) {
   document.documentElement.style.setProperty("--work-bg", theme.work);
   document.documentElement.style.setProperty("--picker-bg", theme.panel);
   document.documentElement.style.setProperty("--theme-border", theme.border);
+  document.body.style.background = `linear-gradient(${theme.page}, #ffffff)`;
+  document.querySelector(".level-picker")?.style.setProperty("background", theme.panel);
+  document.querySelector(".level-picker")?.style.setProperty("border-color", theme.border);
+}
+
+function applyExerciseTheme(exercise, index) {
+  const theme = levelThemes[index % levelThemes.length];
+  exercise.style.background = theme.work;
+  exercise.style.borderColor = theme.border;
 }
 
 function renderCharacter(index) {
