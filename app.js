@@ -120,6 +120,8 @@ const strongStepThemes = [
   ],
 ];
 
+const stepButtonColors = ["#0057ff", "#00a33a", "#e0002f", "#7b2cff", "#ff7900"];
+
 const LEVELS_PER_STEP = 5;
 const worksheet = document.querySelector("#worksheet");
 const levelLabel = document.querySelector("#levelLabel");
@@ -235,6 +237,7 @@ function renderNavigation() {
     button.type = "button";
     button.dataset.step = String(stepIndex);
     button.textContent = `Step ${stepIndex + 1}`;
+    button.style.background = stepButtonColors[stepIndex % stepButtonColors.length];
     button.addEventListener("click", () => {
       const { start } = getStepRange(stepIndex);
       renderLevel(start);
@@ -250,6 +253,7 @@ function renderNavigation() {
     button.dataset.level = String(index);
     button.textContent = String(index - start + 1);
     button.setAttribute("aria-label", `Step ${currentStep + 1}, livello ${index - start + 1}`);
+    button.style.background = getTheme(index).stageB;
     button.addEventListener("click", () => renderLevel(index));
     levelStrip.appendChild(button);
   }
@@ -335,12 +339,16 @@ function refreshNavigation() {
     const stepIndex = Number(button.dataset.step);
     button.classList.toggle("active", stepIndex === currentStep);
     button.classList.toggle("done", isStepComplete(stepIndex));
+    button.style.background = stepButtonColors[stepIndex % stepButtonColors.length];
+    button.style.boxShadow = stepIndex === currentStep ? "0 0 0 4px #ffd54f" : "none";
   });
 
   document.querySelectorAll(".level").forEach((button) => {
     const levelIndex = Number(button.dataset.level);
     button.classList.toggle("active", levelIndex === currentLevel);
     button.classList.toggle("done", completedLevels.has(levelIndex));
+    button.style.background = getTheme(levelIndex).stageB;
+    button.style.boxShadow = levelIndex === currentLevel ? "0 0 0 4px #ffd54f" : "none";
   });
 }
 
