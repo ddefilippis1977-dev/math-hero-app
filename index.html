@@ -15,10 +15,14 @@
         </div>
         <div class="controls" aria-label="Impostazioni">
           <label class="toggle">
+            <input id="soundToggle" type="checkbox" checked />
+            <span>Suoni</span>
+          </label>
+          <label class="toggle">
             <input id="motionToggle" type="checkbox" />
             <span>Animazioni leggere</span>
           </label>
-          <button id="resetBtn" class="icon-button" type="button" aria-label="Ricomincia livello">↻</button>
+          <button id="resetBtn" class="icon-button" type="button" aria-label="Ricomincia livello">R</button>
         </div>
       </section>
 
@@ -53,18 +57,7 @@
         </div>
       </section>
 
-      <nav class="level-strip" aria-label="Scegli livello">
-        <button class="level active" type="button" data-level="0">1</button>
-        <button class="level" type="button" data-level="1">2</button>
-        <button class="level" type="button" data-level="2">3</button>
-        <button class="level" type="button" data-level="3">4</button>
-        <button class="level" type="button" data-level="4">5</button>
-        <button class="level" type="button" data-level="5">6</button>
-        <button class="level" type="button" data-level="6">7</button>
-        <button class="level" type="button" data-level="7">8</button>
-        <button class="level" type="button" data-level="8">9</button>
-        <button class="level" type="button" data-level="9">10</button>
-      </nav>
+      <nav class="level-strip" id="levelStrip" aria-label="Scegli livello"></nav>
 
       <section class="worksheet" id="worksheet" aria-label="Esercizi"></section>
 
@@ -74,6 +67,17 @@
         <button id="nextBtn" class="primary" type="button">Prossimo livello</button>
       </section>
     </main>
+
+    <div id="finalParty" class="final-party" aria-live="polite" hidden>
+      <div class="firework firework-a"></div>
+      <div class="firework firework-b"></div>
+      <div class="firework firework-c"></div>
+      <div class="party-message">
+        <h2>Missione completata!</h2>
+        <p>Tutti i livelli sono corretti.</p>
+        <button id="partyCloseBtn" class="primary" type="button">Gioca ancora</button>
+      </div>
+    </div>
 
     <script src="./app.js"></script>
   </body>
