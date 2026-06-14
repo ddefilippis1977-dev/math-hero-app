@@ -19,12 +19,50 @@ const levels = [
   { title: "Sfida colori", items: [[9, "+", 8], [15, "-", 7], [6, "x", 6], [28, ":", 4]] },
   { title: "Super calcoli", items: [[14, "+", 6], [18, "-", 9], [7, "x", 4], [30, ":", 5]] },
   { title: "Grande finale", items: [[12, "+", 9], [20, "-", 8], [8, "x", 5], [36, ":", 6]] },
+  { title: "Addizioni fino a 25", items: [[13, "+", 7], [16, "+", 5], [11, "+", 9], [14, "+", 8]] },
+  { title: "Sottrazioni fino a 25", items: [[25, "-", 9], [22, "-", 6], [19, "-", 8], [18, "-", 7]] },
+  { title: "Tabellina del 7", items: [[7, "x", 2], [7, "x", 3], [7, "x", 4], [7, "x", 5]] },
+  { title: "Divisioni miste", items: [[18, ":", 6], [21, ":", 7], [32, ":", 8], [45, ":", 9]] },
+  { title: "Finale campione", items: [[15, "+", 12], [30, "-", 11], [9, "x", 5], [48, ":", 6]] },
 ];
 
+const characters = [
+  { icon: "★", name: "Stella Sprint", color: "#ffcc23" },
+  { icon: "◆", name: "Rombo Blu", color: "#1d75d8" },
+  { icon: "●", name: "Pallino Verde", color: "#22a95a" },
+  { icon: "▲", name: "Triangolo Turbo", color: "#f0442f" },
+  { icon: "✦", name: "Luce Veloce", color: "#ff8f1f" },
+  { icon: "☀", name: "Sole Jump", color: "#ffc400" },
+  { icon: "☁", name: "Nuvola Soft", color: "#42b9ec" },
+  { icon: "✚", name: "Plus Power", color: "#20a464" },
+  { icon: "■", name: "Quadrato Go", color: "#7357ff" },
+  { icon: "⬟", name: "Scudo Smile", color: "#ff5c8a" },
+  { icon: "✹", name: "Spark Kid", color: "#00a8a8" },
+  { icon: "⬢", name: "Hexa Hero", color: "#6a9f2a" },
+  { icon: "◈", name: "Diamante Zip", color: "#0f75bd" },
+  { icon: "☄", name: "Cometa Fast", color: "#e94b35" },
+  { icon: "✿", name: "Fiore Pop", color: "#e65db1" },
+  { icon: "♣", name: "Club Green", color: "#248f5f" },
+  { icon: "☂", name: "Ombrello Joy", color: "#8e65d8" },
+  { icon: "✺", name: "Raggio Max", color: "#ff9f1c" },
+  { icon: "⬤", name: "Bolla Boom", color: "#19a0ff" },
+  { icon: "♛", name: "Re Calcolo", color: "#34495e" },
+  { icon: "✧", name: "Nova Mini", color: "#12b886" },
+  { icon: "⬥", name: "Gemma Flash", color: "#f76707" },
+  { icon: "☯", name: "Yoyo Balance", color: "#845ef7" },
+  { icon: "✪", name: "Super Star", color: "#fab005" },
+  { icon: "♦", name: "Final Friend", color: "#e03131" },
+];
+
+const LEVELS_PER_STEP = 5;
 const worksheet = document.querySelector("#worksheet");
 const levelLabel = document.querySelector("#levelLabel");
 const levelTitle = document.querySelector("#levelTitle");
+const stepStrip = document.querySelector("#stepStrip");
 const levelStrip = document.querySelector("#levelStrip");
+const levelCharacter = document.querySelector("#levelCharacter");
+const characterIcon = document.querySelector("#characterIcon");
+const characterName = document.querySelector("#characterName");
 const stars = document.querySelector("#stars");
 const mascot = document.querySelector("#mascot");
 const completeCard = document.querySelector("#completeCard");
@@ -37,6 +75,7 @@ const finalParty = document.querySelector("#finalParty");
 const partyCloseBtn = document.querySelector("#partyCloseBtn");
 
 let currentLevel = 0;
+let currentStep = 0;
 let audioContext;
 let levelPartyTimer;
 const completedLevels = new Set();
@@ -102,33 +141,62 @@ function showLevelParty() {
   }, 2100);
 }
 
-function renderLevelButtons() {
-  let buttons = [...levelStrip.querySelectorAll(".level")];
+function getStepCount() {
+  return Math.ceil(levels.length / LEVELS_PER_STEP);
+}
 
-  if (buttons.length !== levels.length) {
-    levelStrip.innerHTML = "";
-    levels.forEach((_, index) => {
-      const button = document.createElement("button");
-      button.className = "level";
-      button.type = "button";
-      button.dataset.level = String(index);
-      button.textContent = String(index + 1);
-      levelStrip.appendChild(button);
+function getStepRange(stepIndex) {
+  const start = stepIndex * LEVELS_PER_STEP;
+  const end = Math.min(start + LEVELS_PER_STEP, levels.length);
+  return { start, end };
+}
+
+function isStepComplete(stepIndex) {
+  const { start, end } = getStepRange(stepIndex);
+  for (let index = start; index < end; index++) {
+    if (!completedLevels.has(index)) return false;
+  }
+  return true;
+}
+
+function renderNavigation() {
+  stepStrip.innerHTML = "";
+  levelStrip.innerHTML = "";
+
+  for (let stepIndex = 0; stepIndex < getStepCount(); stepIndex++) {
+    const button = document.createElement("button");
+    button.className = "step";
+    button.type = "button";
+    button.dataset.step = String(stepIndex);
+    button.textContent = `Step ${stepIndex + 1}`;
+    button.addEventListener("click", () => {
+      const { start } = getStepRange(stepIndex);
+      renderLevel(start);
     });
-    buttons = [...levelStrip.querySelectorAll(".level")];
+    stepStrip.appendChild(button);
   }
 
-  buttons.forEach((button, index) => {
+  const { start, end } = getStepRange(currentStep);
+  for (let index = start; index < end; index++) {
+    const button = document.createElement("button");
+    button.className = "level";
+    button.type = "button";
     button.dataset.level = String(index);
+    button.textContent = String(index - start + 1);
+    button.setAttribute("aria-label", `Step ${currentStep + 1}, livello ${index - start + 1}`);
     button.addEventListener("click", () => renderLevel(index));
-  });
+    levelStrip.appendChild(button);
+  }
+
+  refreshNavigation();
 }
 
 function renderLevel(index) {
   currentLevel = index;
+  currentStep = Math.floor(currentLevel / LEVELS_PER_STEP);
   const level = levels[currentLevel];
   worksheet.innerHTML = "";
-  levelLabel.textContent = `Livello ${currentLevel + 1}`;
+  levelLabel.textContent = `Step ${currentStep + 1} - Livello ${(currentLevel % LEVELS_PER_STEP) + 1}`;
   levelTitle.textContent = level.title;
   stars.textContent = "";
   completeCard.hidden = true;
@@ -136,7 +204,8 @@ function renderLevel(index) {
   finalParty.hidden = true;
   mascot.classList.remove("success");
 
-  refreshLevelButtons();
+  renderCharacter(index);
+  renderNavigation();
 
   level.items.forEach(([a, operator, b], itemIndex) => {
     const exercise = document.createElement("article");
@@ -159,10 +228,25 @@ function renderLevel(index) {
   worksheet.querySelector("input")?.focus();
 }
 
-function refreshLevelButtons() {
-  document.querySelectorAll(".level").forEach((button, buttonIndex) => {
-    button.classList.toggle("active", buttonIndex === currentLevel);
-    button.classList.toggle("done", completedLevels.has(buttonIndex));
+function renderCharacter(index) {
+  const character = characters[index % characters.length];
+  characterIcon.textContent = character.icon;
+  characterName.textContent = character.name;
+  levelCharacter.style.setProperty("--character-color", character.color);
+  levelCharacter.setAttribute("aria-label", `Personaggio del livello: ${character.name}`);
+}
+
+function refreshNavigation() {
+  document.querySelectorAll(".step").forEach((button) => {
+    const stepIndex = Number(button.dataset.step);
+    button.classList.toggle("active", stepIndex === currentStep);
+    button.classList.toggle("done", isStepComplete(stepIndex));
+  });
+
+  document.querySelectorAll(".level").forEach((button) => {
+    const levelIndex = Number(button.dataset.level);
+    button.classList.toggle("active", levelIndex === currentLevel);
+    button.classList.toggle("done", completedLevels.has(levelIndex));
   });
 }
 
@@ -208,7 +292,7 @@ function updateProgress() {
     completedLevels.add(currentLevel);
     mascot.classList.add("success");
     completeCard.hidden = false;
-    refreshLevelButtons();
+    refreshNavigation();
 
     if (firstCompletion) {
       showLevelParty();
@@ -241,5 +325,4 @@ motionToggle.addEventListener("change", () => {
   document.body.classList.toggle("reduce-motion", motionToggle.checked);
 });
 
-renderLevelButtons();
 renderLevel(0);

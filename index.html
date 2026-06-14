@@ -46,6 +46,10 @@
             </div>
             <div class="body"></div>
           </div>
+          <div id="levelCharacter" class="level-character" role="img" aria-label="Personaggio del livello">
+            <div id="characterIcon" class="character-icon">★</div>
+            <div id="characterName" class="character-name">Stella Sprint</div>
+          </div>
         </div>
 
         <div class="progress-panel">
@@ -58,29 +62,10 @@
       </section>
 
       <section class="level-picker" aria-label="Scegli livello">
-        <p class="panel-label">Scegli livello</p>
-        <nav class="level-strip" id="levelStrip" aria-label="Livelli disponibili">
-          <button class="level active" type="button" data-level="0">1</button>
-          <button class="level" type="button" data-level="1">2</button>
-          <button class="level" type="button" data-level="2">3</button>
-          <button class="level" type="button" data-level="3">4</button>
-          <button class="level" type="button" data-level="4">5</button>
-          <button class="level" type="button" data-level="5">6</button>
-          <button class="level" type="button" data-level="6">7</button>
-          <button class="level" type="button" data-level="7">8</button>
-          <button class="level" type="button" data-level="8">9</button>
-          <button class="level" type="button" data-level="9">10</button>
-          <button class="level" type="button" data-level="10">11</button>
-          <button class="level" type="button" data-level="11">12</button>
-          <button class="level" type="button" data-level="12">13</button>
-          <button class="level" type="button" data-level="13">14</button>
-          <button class="level" type="button" data-level="14">15</button>
-          <button class="level" type="button" data-level="15">16</button>
-          <button class="level" type="button" data-level="16">17</button>
-          <button class="level" type="button" data-level="17">18</button>
-          <button class="level" type="button" data-level="18">19</button>
-          <button class="level" type="button" data-level="19">20</button>
-        </nav>
+        <p class="panel-label">Scegli step</p>
+        <nav class="step-strip" id="stepStrip" aria-label="Step disponibili"></nav>
+        <p class="panel-label level-subtitle">Livelli dello step</p>
+        <nav class="level-strip" id="levelStrip" aria-label="Livelli disponibili"></nav>
       </section>
 
       <section class="worksheet" id="worksheet" aria-label="Esercizi"></section>
