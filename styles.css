@@ -308,33 +308,30 @@ h2 {
 }
 
 .level-character {
-  position: absolute;
-  left: 50%;
-  top: 24px;
-  width: 150px;
-  min-height: 118px;
+  width: 172px;
+  min-height: 74px;
   display: grid;
+  grid-template-columns: 54px 1fr;
   place-items: center;
-  gap: 6px;
-  padding: 12px;
-  border: 4px solid #ffffff;
+  gap: 8px;
+  padding: 8px;
+  border: 3px solid #101820;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
+  background: #ffffff;
   box-shadow: 0 12px 26px rgba(13, 73, 128, 0.18);
-  transform: translateX(-50%);
   animation: characterFloat 2.4s ease-in-out infinite;
 }
 
 .character-icon {
-  width: 62px;
-  height: 62px;
+  width: 50px;
+  height: 50px;
   display: grid;
   place-items: center;
   border: 4px solid #101820;
   border-radius: 50%;
   background: var(--character-color, #ffcc23);
   color: #ffffff;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 900;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
 }
@@ -811,10 +808,10 @@ body.reduce-motion .thumbs-hero {
 @keyframes characterFloat {
   0%,
   100% {
-    transform: translateX(-50%) translateY(0) rotate(-1deg);
+    transform: translateY(0) rotate(-1deg);
   }
   50% {
-    transform: translateX(-50%) translateY(-9px) rotate(2deg);
+    transform: translateY(-5px) rotate(2deg);
   }
 }
 
@@ -881,10 +878,10 @@ body.reduce-motion .thumbs-hero {
   }
 
   .level-character {
-    left: 50%;
-    top: 18px;
-    width: 122px;
-    min-height: 100px;
+    width: 100%;
+    min-height: 70px;
+    grid-template-columns: 50px 1fr;
+    justify-items: start;
     padding: 8px;
   }
 
