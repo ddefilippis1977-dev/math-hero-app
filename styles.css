@@ -454,8 +454,185 @@ h2 {
 body.reduce-motion .runner,
 body.reduce-motion .mascot.success,
 body.reduce-motion .robot,
-body.reduce-motion .firework {
+body.reduce-motion .firework,
+body.reduce-motion .mini-firework,
+body.reduce-motion .thumbs-hero {
   animation: none;
+}
+
+.level-party {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+}
+
+.level-party[hidden] {
+  display: none;
+}
+
+.thumbs-hero {
+  position: relative;
+  width: min(360px, calc(100% - 40px));
+  height: 250px;
+  animation: popHero 1.9s ease both;
+}
+
+.thumbs-quills {
+  position: absolute;
+  left: 55px;
+  top: 46px;
+  width: 128px;
+  height: 116px;
+  border-radius: 50% 58% 48% 52%;
+  background: var(--deep);
+  transform: rotate(-9deg);
+  filter: drop-shadow(0 12px 18px rgba(0, 42, 88, 0.22));
+}
+
+.thumbs-quills::before,
+.thumbs-quills::after {
+  content: "";
+  position: absolute;
+  width: 92px;
+  height: 42px;
+  left: -34px;
+  border-radius: 8px 80px 80px 8px;
+  background: var(--deep);
+}
+
+.thumbs-quills::before {
+  top: 16px;
+  transform: rotate(-34deg);
+}
+
+.thumbs-quills::after {
+  top: 62px;
+  transform: rotate(18deg);
+}
+
+.thumbs-face {
+  position: absolute;
+  left: 132px;
+  top: 78px;
+  width: 92px;
+  height: 76px;
+  border: 4px solid #101820;
+  border-radius: 48% 46% 52% 44%;
+  background: #ffd9a3;
+}
+
+.thumbs-eye {
+  position: absolute;
+  top: 20px;
+  width: 13px;
+  height: 20px;
+  border-radius: 50%;
+  background: #101820;
+}
+
+.thumbs-eye.left {
+  left: 25px;
+}
+
+.thumbs-eye.right {
+  left: 50px;
+}
+
+.thumbs-mouth {
+  position: absolute;
+  left: 24px;
+  top: 44px;
+  width: 42px;
+  height: 17px;
+  border-bottom: 4px solid #101820;
+  border-radius: 0 0 42px 42px;
+}
+
+.thumbs-hand {
+  position: absolute;
+  right: 50px;
+  top: 42px;
+  width: 78px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #101820;
+  border-radius: 50% 50% 44% 44%;
+  background: #ffffff;
+  color: var(--good);
+  font-size: 22px;
+  font-weight: 900;
+  transform: rotate(-16deg);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.thumbs-hand::before {
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: -30px;
+  width: 24px;
+  height: 42px;
+  border: 4px solid #101820;
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  background: #ffffff;
+}
+
+.thumbs-text {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 0;
+  padding: 12px;
+  border: 4px solid #ffffff;
+  border-radius: 8px;
+  background: var(--good);
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(24px, 7vw, 38px);
+  font-weight: 900;
+  box-shadow: var(--shadow);
+}
+
+.mini-firework {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 -58px #ffcc23,
+    42px -42px #f0442f,
+    58px 0 #22a95a,
+    42px 42px #22a5ff,
+    0 58px #ffffff,
+    -42px 42px #ff8f1f,
+    -58px 0 #ffcc23,
+    -42px -42px #22a5ff;
+  animation: firework 0.95s ease-out infinite;
+}
+
+.mini-firework-a {
+  left: 20%;
+  top: 28%;
+}
+
+.mini-firework-b {
+  right: 18%;
+  top: 32%;
+  animation-delay: 0.2s;
+}
+
+.mini-firework-c {
+  left: 50%;
+  bottom: 22%;
+  animation-delay: 0.42s;
 }
 
 .final-party {
@@ -571,6 +748,25 @@ body.reduce-motion .firework {
   100% {
     opacity: 0;
     transform: scale(1.45);
+  }
+}
+
+@keyframes popHero {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.7);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0) scale(1.06);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
   }
 }
 

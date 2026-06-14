@@ -32,11 +32,13 @@ const nextBtn = document.querySelector("#nextBtn");
 const resetBtn = document.querySelector("#resetBtn");
 const motionToggle = document.querySelector("#motionToggle");
 const soundToggle = document.querySelector("#soundToggle");
+const levelParty = document.querySelector("#levelParty");
 const finalParty = document.querySelector("#finalParty");
 const partyCloseBtn = document.querySelector("#partyCloseBtn");
 
 let currentLevel = 0;
 let audioContext;
+let levelPartyTimer;
 const completedLevels = new Set();
 
 function solve(a, operator, b) {
@@ -87,6 +89,19 @@ function playVictoryMusic() {
   notes.forEach((note, index) => playTone(note, 0.18, "triangle", index * 0.16, 0.14));
 }
 
+function showLevelParty() {
+  levelParty.hidden = false;
+  levelParty.classList.remove("replay");
+  void levelParty.offsetWidth;
+  levelParty.classList.add("replay");
+
+  window.clearTimeout(levelPartyTimer);
+  levelPartyTimer = window.setTimeout(() => {
+    levelParty.hidden = true;
+    levelParty.classList.remove("replay");
+  }, 2100);
+}
+
 function renderLevelButtons() {
   let buttons = [...levelStrip.querySelectorAll(".level")];
 
@@ -117,6 +132,7 @@ function renderLevel(index) {
   levelTitle.textContent = level.title;
   stars.textContent = "";
   completeCard.hidden = true;
+  levelParty.hidden = true;
   finalParty.hidden = true;
   mascot.classList.remove("success");
 
@@ -193,6 +209,10 @@ function updateProgress() {
     mascot.classList.add("success");
     completeCard.hidden = false;
     refreshLevelButtons();
+
+    if (firstCompletion) {
+      showLevelParty();
+    }
 
     if (firstCompletion && completedLevels.size === levels.length) {
       finalParty.hidden = false;
