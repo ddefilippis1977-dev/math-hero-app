@@ -88,15 +88,24 @@ function playVictoryMusic() {
 }
 
 function renderLevelButtons() {
-  levelStrip.innerHTML = "";
-  levels.forEach((_, index) => {
-    const button = document.createElement("button");
-    button.className = "level";
-    button.type = "button";
+  let buttons = [...levelStrip.querySelectorAll(".level")];
+
+  if (buttons.length !== levels.length) {
+    levelStrip.innerHTML = "";
+    levels.forEach((_, index) => {
+      const button = document.createElement("button");
+      button.className = "level";
+      button.type = "button";
+      button.dataset.level = String(index);
+      button.textContent = String(index + 1);
+      levelStrip.appendChild(button);
+    });
+    buttons = [...levelStrip.querySelectorAll(".level")];
+  }
+
+  buttons.forEach((button, index) => {
     button.dataset.level = String(index);
-    button.textContent = String(index + 1);
     button.addEventListener("click", () => renderLevel(index));
-    levelStrip.appendChild(button);
   });
 }
 
