@@ -82,6 +82,44 @@ const levelThemes = [
   { page: "#ff7b00", stageA: "#ff5400", stageB: "#9d2500", work: "#ffbd7a", panel: "#ffe3c2", border: "#f76707" },
 ];
 
+const strongStepThemes = [
+  [
+    { page: "#bde9ff", stageA: "#00a8ff", stageB: "#0057ff", work: "#8fd8ff", panel: "#d8f3ff", border: "#0057ff" },
+    { page: "#a6ddff", stageA: "#008cff", stageB: "#003cff", work: "#76caff", panel: "#cdeeff", border: "#004cff" },
+    { page: "#90d2ff", stageA: "#0070f0", stageB: "#002fb3", work: "#5dbdff", panel: "#c3e9ff", border: "#003cff" },
+    { page: "#75c4ff", stageA: "#005eff", stageB: "#001f80", work: "#45adff", panel: "#b9e4ff", border: "#002fb3" },
+    { page: "#5ab6ff", stageA: "#004cff", stageB: "#00145c", work: "#2f9cff", panel: "#aee0ff", border: "#001f80" },
+  ],
+  [
+    { page: "#b7ffcf", stageA: "#00d45a", stageB: "#00802b", work: "#8cffad", panel: "#d9ffe5", border: "#008f31" },
+    { page: "#9cffbd", stageA: "#00bd4b", stageB: "#006b24", work: "#6dff95", panel: "#cfffdd", border: "#007a2a" },
+    { page: "#7dffa8", stageA: "#00a83e", stageB: "#005c1d", work: "#55f582", panel: "#c2ffd4", border: "#006b24" },
+    { page: "#60f28f", stageA: "#009432", stageB: "#004d18", work: "#3fe36e", panel: "#b6ffc9", border: "#005c1d" },
+    { page: "#45e278", stageA: "#00802b", stageB: "#003d12", work: "#25d85b", panel: "#aaffbf", border: "#004d18" },
+  ],
+  [
+    { page: "#ffc4c4", stageA: "#ff3b30", stageB: "#b00020", work: "#ff9999", panel: "#ffe0e0", border: "#d00028" },
+    { page: "#ffadad", stageA: "#ff1744", stageB: "#970018", work: "#ff8585", panel: "#ffd6d6", border: "#c00022" },
+    { page: "#ff9696", stageA: "#e6002b", stageB: "#800014", work: "#ff7070", panel: "#ffcccc", border: "#ad001e" },
+    { page: "#ff7f7f", stageA: "#d00024", stageB: "#69000f", work: "#ff5c5c", panel: "#ffc2c2", border: "#970018" },
+    { page: "#ff6666", stageA: "#bd001f", stageB: "#52000b", work: "#ff4747", panel: "#ffb8b8", border: "#800014" },
+  ],
+  [
+    { page: "#dfc2ff", stageA: "#8b3dff", stageB: "#4b008f", work: "#c99cff", panel: "#f0e0ff", border: "#6f1ed6" },
+    { page: "#d4a8ff", stageA: "#7b2cff", stageB: "#3a0070", work: "#bb82ff", panel: "#ead4ff", border: "#5f12c2" },
+    { page: "#c990ff", stageA: "#6a1fe6", stageB: "#2c0057", work: "#ad68ff", panel: "#e4c8ff", border: "#4f0fab" },
+    { page: "#bc78ff", stageA: "#5a16cc", stageB: "#220042", work: "#9d4dff", panel: "#debaff", border: "#3f0b8f" },
+    { page: "#ae60ff", stageA: "#4b0fb3", stageB: "#190030", work: "#8f35ff", panel: "#d7adff", border: "#320873" },
+  ],
+  [
+    { page: "#ffd29c", stageA: "#ff8500", stageB: "#b33b00", work: "#ffb86b", panel: "#ffe6c7", border: "#e8590c" },
+    { page: "#ffc078", stageA: "#ff7300", stageB: "#993000", work: "#ffa94d", panel: "#ffdfb8", border: "#d9480f" },
+    { page: "#ffae52", stageA: "#ff6200", stageB: "#802600", work: "#ff922b", panel: "#ffd8a8", border: "#c43e00" },
+    { page: "#ff9d2e", stageA: "#f05200", stageB: "#661c00", work: "#ff7b00", panel: "#ffd099", border: "#a83200" },
+    { page: "#ff8c00", stageA: "#d94800", stageB: "#4d1300", work: "#ff6b00", panel: "#ffc98a", border: "#8f2a00" },
+  ],
+];
+
 const LEVELS_PER_STEP = 5;
 const worksheet = document.querySelector("#worksheet");
 const levelLabel = document.querySelector("#levelLabel");
@@ -259,7 +297,7 @@ function renderLevel(index) {
 }
 
 function renderTheme(index) {
-  const theme = levelThemes[index % levelThemes.length];
+  const theme = getTheme(index);
   document.documentElement.style.setProperty("--page-bg", theme.page);
   document.documentElement.style.setProperty("--stage-a", theme.stageA);
   document.documentElement.style.setProperty("--stage-b", theme.stageB);
@@ -272,9 +310,16 @@ function renderTheme(index) {
 }
 
 function applyExerciseTheme(exercise, index) {
-  const theme = levelThemes[index % levelThemes.length];
-  exercise.style.background = theme.work;
+  const theme = getTheme(index);
+  exercise.style.background = `linear-gradient(135deg, ${theme.work} 0%, #ffffff 118%)`;
   exercise.style.borderColor = theme.border;
+  exercise.style.boxShadow = `0 8px 20px ${theme.border}33`;
+}
+
+function getTheme(index) {
+  const stepIndex = Math.floor(index / LEVELS_PER_STEP) % strongStepThemes.length;
+  const levelIndex = index % LEVELS_PER_STEP;
+  return strongStepThemes[stepIndex][levelIndex];
 }
 
 function renderCharacter(index) {
