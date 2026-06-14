@@ -18,7 +18,8 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(#dff6ff, #ffffff);
+  background: linear-gradient(var(--page-bg, #dff6ff), #ffffff);
+  transition: background 0.35s ease;
 }
 
 button,
@@ -120,8 +121,9 @@ h2 {
     radial-gradient(circle at 82% 17%, #ffffff 0 18px, transparent 19px),
     radial-gradient(circle at 87% 14%, #ffffff 0 24px, transparent 25px),
     radial-gradient(circle at 93% 18%, #ffffff 0 16px, transparent 17px),
-    linear-gradient(160deg, #73d8fb, #42b9ec);
+    linear-gradient(160deg, var(--stage-a, #73d8fb), var(--stage-b, #42b9ec));
   box-shadow: var(--shadow);
+  transition: background 0.35s ease;
 }
 
 .mascot-zone {

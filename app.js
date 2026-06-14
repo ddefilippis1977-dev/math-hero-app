@@ -54,6 +54,34 @@ const characters = [
   { icon: "♦", name: "Final Friend", color: "#e03131" },
 ];
 
+const levelThemes = [
+  { page: "#dff6ff", stageA: "#73d8fb", stageB: "#42b9ec" },
+  { page: "#eafff4", stageA: "#7be7aa", stageB: "#38c172" },
+  { page: "#fff5d6", stageA: "#ffd166", stageB: "#f59f00" },
+  { page: "#ffe8e8", stageA: "#ff8a80", stageB: "#f0442f" },
+  { page: "#f0eaff", stageA: "#b197fc", stageB: "#7357ff" },
+  { page: "#e8fbff", stageA: "#74e4ff", stageB: "#19a0ff" },
+  { page: "#fff0f6", stageA: "#faa2c1", stageB: "#e64980" },
+  { page: "#edf7d7", stageA: "#b2f26b", stageB: "#74b816" },
+  { page: "#fff3e6", stageA: "#ffa94d", stageB: "#f76707" },
+  { page: "#eaf2ff", stageA: "#91c5ff", stageB: "#1d75d8" },
+  { page: "#f7f9e8", stageA: "#e9fac8", stageB: "#94d82d" },
+  { page: "#f0fffb", stageA: "#63e6be", stageB: "#12b886" },
+  { page: "#fff9db", stageA: "#ffec99", stageB: "#fab005" },
+  { page: "#f3f0ff", stageA: "#d0bfff", stageB: "#845ef7" },
+  { page: "#e6fcf5", stageA: "#96f2d7", stageB: "#20c997" },
+  { page: "#fff4e6", stageA: "#ffc078", stageB: "#fd7e14" },
+  { page: "#edf2ff", stageA: "#bac8ff", stageB: "#4c6ef5" },
+  { page: "#ebfbee", stageA: "#8ce99a", stageB: "#37b24d" },
+  { page: "#f8f0fc", stageA: "#e599f7", stageB: "#ae3ec9" },
+  { page: "#e3fafc", stageA: "#66d9e8", stageB: "#1098ad" },
+  { page: "#fff0f0", stageA: "#ffa8a8", stageB: "#fa5252" },
+  { page: "#f4fce3", stageA: "#c0eb75", stageB: "#82c91e" },
+  { page: "#e7f5ff", stageA: "#74c0fc", stageB: "#228be6" },
+  { page: "#fff0f6", stageA: "#f783ac", stageB: "#d6336c" },
+  { page: "#f1f3f5", stageA: "#adb5bd", stageB: "#495057" },
+];
+
 const LEVELS_PER_STEP = 5;
 const worksheet = document.querySelector("#worksheet");
 const levelLabel = document.querySelector("#levelLabel");
@@ -204,6 +232,7 @@ function renderLevel(index) {
   finalParty.hidden = true;
   mascot.classList.remove("success");
 
+  renderTheme(index);
   renderCharacter(index);
   renderNavigation();
 
@@ -226,6 +255,13 @@ function renderLevel(index) {
   });
 
   worksheet.querySelector("input")?.focus();
+}
+
+function renderTheme(index) {
+  const theme = levelThemes[index % levelThemes.length];
+  document.documentElement.style.setProperty("--page-bg", theme.page);
+  document.documentElement.style.setProperty("--stage-a", theme.stageA);
+  document.documentElement.style.setProperty("--stage-b", theme.stageB);
 }
 
 function renderCharacter(index) {
